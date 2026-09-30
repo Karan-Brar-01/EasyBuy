@@ -1,69 +1,88 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, MapPinned, Package, Route } from "lucide-react";
 
-export default function Home() {
+import { buttonVariants } from "@/components/ui/button";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-4 py-12">
+      <div className="space-y-4">
+        <p className="text-muted-foreground text-xs uppercase tracking-[0.2em]">
+          Rural ↔ urban crowd-shipping
+        </p>
+        <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+          RouteRelay
+        </h1>
+        <p className="text-muted-foreground max-w-xl text-base leading-relaxed">
+          Village buyers hitch purchases onto daily city commute routes. Escrow
+          stays locked until a QR handshake at drop-off.
+        </p>
+        <div className="flex flex-wrap gap-3 pt-1">
+          <Link
+            href="/marketplace"
+            className={cn(buttonVariants({ size: "lg" }))}
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Browse gigs
+            <ArrowRight className="ml-1 size-4" />
+          </Link>
+          <Link
+            href="/requests/new"
+            className={cn(buttonVariants({ size: "lg", variant: "outline" }))}
           >
-            Documentation
-          </a>
+            I need something
+          </Link>
         </div>
-      </main>
-    </div>
+      </div>
+
+      <div className="grid gap-3 sm:grid-cols-3">
+        <Link href="/routes/new" className="block">
+          <Card className="h-full transition hover:border-teal-700/40">
+            <CardHeader className="pb-2">
+              <Route className="text-muted-foreground mb-2 size-5" />
+              <CardTitle className="text-base">Publish a trip</CardTitle>
+              <CardDescription>
+                City → village with Bike, Car, or Bus capacity.
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        </Link>
+        <Link href="/requests/new" className="block">
+          <Card className="h-full transition hover:border-teal-700/40">
+            <CardHeader className="pb-2">
+              <Package className="text-muted-foreground mb-2 size-5" />
+              <CardTitle className="text-base">Post a request</CardTitle>
+              <CardDescription>
+                Pin shop & drop-off; preview dynamic bounty.
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        </Link>
+        <Link href="/marketplace" className="block">
+          <Card className="h-full transition hover:border-teal-700/40">
+            <CardHeader className="pb-2">
+              <MapPinned className="text-muted-foreground mb-2 size-5" />
+              <CardTitle className="text-base">Marketplace</CardTitle>
+              <CardDescription>
+                Live gigs with detour minutes and payout.
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        </Link>
+      </div>
+
+      <p className="text-muted-foreground text-center text-sm">
+        <Link href="/analytics" className="font-medium text-teal-800 underline">
+          Open analytics
+        </Link>{" "}
+        for deviation, emissions, and combined bounty clusters.
+      </p>
+    </main>
   );
 }
